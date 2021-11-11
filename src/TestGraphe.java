@@ -25,65 +25,23 @@ public class TestGraphe {
         int nbArcs = Integer.parseInt(content.get(1)); //2ème ligne = nbArcs
 
         String[] lineDataString; //Données de la ligne au format String
-        Integer[] lineData = {null, null, null};
         int lineDataIndex; //Donnée concernée (Extrémité Initiale, terminale, ou valeur de l'arc
-        ArrayList<Integer[]> data = new ArrayList<>(); //ArrayList contenant les données de chaque ligne
+        ArrayList<ArrayList<Integer>> data = new ArrayList<>(); //ArrayList contenant les données de chaque ligne
 
         for(int i = 2; i < content.size(); i++) {
+            ArrayList<Integer> lineData = new ArrayList<>(); //Ligne contenant les données
             lineDataString = content.get(i).split(" "); //Convertion de la ligne en tableau contenant les données de la ligne
 
-            for(int j = 0; j < lineDataString.length; j++) {
-                lineDataIndex = Integer.parseInt(lineDataString[j]); //String to int
-                lineData[j] = lineDataIndex; //Ajout de la donnée de la ligne
+            for (String s : lineDataString) {
+                lineDataIndex = Integer.parseInt(s); //String to int
+                lineData.add(lineDataIndex); //Ajout de la donnée de la ligne
             }
 
-            data.add(lineData);
+            data.add(lineData); //Ajout de la ligne à l'ArrayList générale
         }
 
-        Graphe graphe = new Graphe(nbSommets, nbArcs, data);
+        Graphe graphe = new Graphe(nbSommets, nbArcs, data); //Création d'un nouveau graphe contenant les valeurs brutes
         graphe.afficherBrut();
-
-        //BufferedReader permet de lire le contenu d'un fichier
-//        try (BufferedReader br = new BufferedReader(new FileReader(grapheFile))) {
-//            StringBuilder sb = new StringBuilder(); //Utiliser pour mettre en mémoire le contenu du fichier
-//
-//            String line = br.readLine(); //Lit la première ligne
-//            int nbSommets = Integer.parseInt(line); //1ère ligne = nbSommets, donc on l'assigne
-//            line = br.readLine(); //Lit la deuxième ligne
-//            int nbArcs = Integer.parseInt(line); //2ème ligne = nbArcs
-//            Graphe g = new Graphe(nbSommets, nbArcs);
-//            System.out.println(g.getNbSommets());
-//            System.out.println(g.getNbArcs());
-//
-//            String[] lineDataString; //Données de la ligne au format String
-//            Integer[] lineData = { 0, 0, 0};
-//            int lineDataIndex; //Numéro de la donnée concernée (Extrémité Initiale, terminale, ou valeur de l'arc
-//            ArrayList<Integer[]> data = new ArrayList<>(); //ArrayList contenant les données de chaque ligne
-//
-//            //Tant que le BufferedReader ne renvoit pas nul (=tant qu'on est pas arrivés à la fin du fichier),
-//            //On lit et on met en mémoire le contenu du graphe dans un string "contenu"
-//            while (line != null) {
-//                sb.append(line);
-//                sb.append(System.lineSeparator());
-//                line = br.readLine();
-//                lineDataString = line.split(" "); //Convertion de la ligne en tableau contenant les données de la ligne
-//
-//                //Pour chaque donnée de ligne, l'ajouter au tableau de la ligne
-//                for(int i = 0; i < lineDataString.length; i++) {
-//                    lineDataIndex = Integer.parseInt(lineDataString[i]); //String to int
-//                    lineData[i] = lineDataIndex; //Ajout de la donnée de la ligne
-//                }
-//                data.add(lineData);
-//            }
-//
-//            Graphe graphe = new Graphe(nbSommets, nbArcs, data);
-//            graphe.afficherBrut();
-//            String contenu = sb.toString();
-//            System.out.println(contenu); //Affichage du contenu du fichier
-//        }
-//        catch (Exception e) { //Si le fichier n'est pas trouvé, on affiche une erreur
-//            System.out.println("[ERR] Fichier introuvable");
-//        }
 
         // 3.Affichage du graphe (sous forme de matrice(s))
         // 4.Floyd-Warshall

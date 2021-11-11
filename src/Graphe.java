@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Graphe {
     private int nbSommets;
     private int nbArcs;
-    private ArrayList<Integer[]> data; //Tableau contenant des tableaux contenant chacun [extremite initiale, terminale, valeur arc]
+    private ArrayList<ArrayList<Integer>> data; //ArrayList contenant des ArrayList contenant chacune [extremite initiale, terminale, valeur arc]
 
     public Graphe(int nbSommets, int nbArcs) {
         this.nbSommets = nbSommets;
@@ -12,7 +12,7 @@ public class Graphe {
     }
 
     //Constructeur du graphe
-    public Graphe(int nbSommets, int nbArcs, ArrayList<Integer[]> data) {
+    public Graphe(int nbSommets, int nbArcs, ArrayList<ArrayList<Integer>> data) {
         this.nbSommets = nbSommets;
         this.nbArcs = nbArcs;
         this.data = data;
@@ -25,8 +25,8 @@ public class Graphe {
         System.out.println(nbSommets);
         System.out.println(nbArcs);
 
-        for(Integer[] lineData: data) {
-            System.out.println(Arrays.toString(lineData));
+        for (ArrayList<Integer> lineData : data) {
+            System.out.println(lineData);
         }
     }
 
@@ -47,10 +47,10 @@ public class Graphe {
     }
 
     //GETTER SETTER DATA
-    public ArrayList<Integer[]> getData() {
+    public ArrayList<ArrayList<Integer>> getData() {
         return data;
     }
-    public void setData(ArrayList<Integer[]> data) {
+    public void setData(ArrayList<ArrayList<Integer>> data) {
         this.data = data;
     }
 }
