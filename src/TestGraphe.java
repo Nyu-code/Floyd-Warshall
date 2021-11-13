@@ -46,7 +46,10 @@ public class TestGraphe {
             Graphe graphe = new Graphe(nbSommets, nbArcs, data); //Création d'un nouveau graphe contenant les valeurs brutes
             graphe.afficherBrut();
 
-            // 3.Affichage du graphe (sous forme de matrice(s))
+            // 3.Affichage du graphe (Matrice d'adjacence et matrice de valeurs)
+            int[][] matriceAdj = graphe.matriceAdj();
+            graphe.afficherMatriceAdj();
+
             // 4.Floyd-Warshall
             // 5.Existence de circuit absorbant ?
             // 5.1.Si NON: affichage des chemins
