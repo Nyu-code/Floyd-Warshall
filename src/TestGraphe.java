@@ -50,6 +50,9 @@ public class TestGraphe {
             int[][] matriceAdj = graphe.matriceAdj();
             graphe.afficherMatriceAdj();
 
+            int[][] matriceVal = graphe.matriceValeurs();
+            graphe.afficherMatriceValeurs();
+
             // 4.Floyd-Warshall
             // 5.Existence de circuit absorbant ?
             // 5.1.Si NON: affichage des chemins
