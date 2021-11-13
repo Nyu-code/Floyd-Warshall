@@ -15,7 +15,7 @@ public class TestGraphe {
         Scanner sc = new Scanner(System.in); // Création d'un scanner pour que l'utilisateur entre le numéro du graphe
 
         System.out.println("Veuillez entrer le numéro du graphe que vous voulez analyser: ");
-        int numGraphe = sc.nextInt(); // L'utilisateur entre le numéro
+        String numGraphe = sc.nextLine(); // L'utilisateur entre le numéro
         String path = "Graphes/" + numGraphe + ".txt"; //Chemin vers le graphe mentionné par l'utilisateur
         File f = new File(path);
         if(!f.exists()) {
