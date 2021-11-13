@@ -18,10 +18,12 @@ public class TestGraphe {
         String numGraphe = sc.nextLine(); // L'utilisateur entre le numéro
         String path = "Graphes/" + numGraphe + ".txt"; //Chemin vers le graphe mentionné par l'utilisateur
         File f = new File(path);
+
+        // 2.Lecture du graphe sur le fichier et mise en mémoire
+        //Si le fichier n'existe pas, arrêter le programme
         if(!f.exists()) {
             System.out.println("[ERR] Fichier introuvable.");
         } else {
-            // 2.Lecture du graphe sur le fichier et mise en mémoire
             List<String> content = Files.readAllLines(Paths.get(path));
 
             int nbSommets = Integer.parseInt(content.get(0)); //1ère ligne = nbSommets, donc on l'assigne
