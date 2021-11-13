@@ -53,9 +53,9 @@ public class Graphe {
 
     //Affiche la matrice d'adjacence
     public void afficherMatriceAdj() {
-        for (int[] ints : matriceAdjacence) {
-            for (int j = 0; j < matriceAdjacence.length; j++) {
-                System.out.print(ints[j] + " ");
+        for(int i = 0; i < matriceAdjacence.length; i++) {
+            for(int j = 0; j < matriceAdjacence.length; j++) {
+                System.out.print(matriceAdjacence[i][j] + " ");
             }
             System.out.println();
         }
