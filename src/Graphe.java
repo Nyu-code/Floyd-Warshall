@@ -20,7 +20,7 @@ public class Graphe {
         this.data = data;
     }
 
-    //Affichage du graphe de manière brute (utilisée à des fins de tests)
+    //Affichage du graphe de manière brute [À DES FINS DE TESTS, INUTILE SINON]
     public void afficherBrut() {
         System.out.println("GRAPHE BRUT");
         System.out.println("- - - - -");

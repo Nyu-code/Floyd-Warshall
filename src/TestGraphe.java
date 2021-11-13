@@ -44,7 +44,7 @@ public class TestGraphe {
             }
 
             Graphe graphe = new Graphe(nbSommets, nbArcs, data); //Création d'un nouveau graphe contenant les valeurs brutes
-            graphe.afficherBrut();
+            //graphe.afficherBrut();
 
             // 3.Affichage du graphe (Matrice d'adjacence et matrice de valeurs)
             int[][] matriceAdj = graphe.matriceAdj();
