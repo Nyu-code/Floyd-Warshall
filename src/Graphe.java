@@ -143,6 +143,10 @@ public class Graphe {
         return false;
     }
 
+    //GETTER Matrice Floyd-Warshall
+    public int [][] getMatriceFloydWarshall(){
+        return matriceFloydWarshall;
+    }
     //GETTER SETTER NBSOMMETS
     public int getNbSommets() {
         return nbSommets;

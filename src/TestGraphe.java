@@ -63,8 +63,9 @@ public class TestGraphe {
             graphe.floyd_Warshall();
             graphe.afficherMatriceFloydWarshall();
 
-            System.out.println(graphe.possedeCircuitAbsorbant(matriceVal));
+
             // 5.Existence de circuit absorbant ?
+            System.out.println(graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall()));
             // 5.1.Si NON: affichage des chemins
             //6.Demander si on veut recommencer avec un autre graphe
         }
