@@ -129,6 +129,20 @@ public class Graphe {
         }
         System.out.println();
     }
+
+    public boolean possedeCircuitAbsorbant(int[][] matriceValeurs){
+        for(int i = 0; i < matriceValeurs.length; i++) {
+            for(int j = 0; j < matriceValeurs.length; j++) {
+                if (i != j){
+                    if (matriceValeurs[i][j] < 0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     //GETTER SETTER NBSOMMETS
     public int getNbSommets() {
         return nbSommets;
