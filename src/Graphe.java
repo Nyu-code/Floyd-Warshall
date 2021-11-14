@@ -106,8 +106,6 @@ public class Graphe {
                 for (int j = 0; j < nbSommets; j++) {
                     if (matriceFloydWarshall[i][k] != 0 && matriceFloydWarshall[k][j] != 0) { //On vérifie qu'il n'y a pas de valeur infinie si il y en a un la valeur de M[i,j] reste pareil
                         int val = matriceFloydWarshall[i][k] + matriceFloydWarshall[k][j]; //Sinon on calcule le coût du chemin de i => k => j
-                        System.out.println(val);
-                        System.out.println(matriceFloydWarshall[i][j]);
                         if ( i!= j & matriceFloydWarshall[i][j] == 0){ //Si le chemin directe de i vers j = 0 ce qui veut dire infinie alors on lui accorde la valeur calculé directement et que le 0 n'est pas égale à une valeur de la diagonale.
                             matriceFloydWarshall[i][j] = val; //Si la valeur n'est pas égale à l'infinie alors on peut commencer la comparaison.
                         }
