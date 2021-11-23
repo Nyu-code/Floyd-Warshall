@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Graphe {
     private int nbSommets;
@@ -113,6 +114,7 @@ public class Graphe {
             for (int i = 0; i < nbSommets; i++) { //Boucle pour une matrice (nb sommets * nb sommets)
                 System.out.println("i = " + i);
                 for (int j = 0; j < nbSommets; j++) {
+                    System.out.println("j = " + j);
                     if (matriceFloydWarshall[i][k] != "inf" & matriceFloydWarshall[k][j] != "inf" & i!=j) { //On vérifie qu'il n'y a pas de valeur infinie si il y en a un la valeur de M[i,j] reste pareil
                         int val = Integer.parseInt(matriceFloydWarshall[i][k]) + Integer.parseInt(matriceFloydWarshall[k][j]); //Sinon on calcule le coût du chemin de i => k => j
                         System.out.println(matriceFloydWarshall[i][j]);
@@ -127,15 +129,55 @@ public class Graphe {
             }
         }
     }
+    public List<Integer> rechercheMaxLengthColonne(String[][] m){
+        List<Integer> listMaxColonne = new ArrayList<>();
+        for (int i = 0 ; i<m.length ; i++){
+            int maxval = 0;
+            for(int j = 0 ; j < m.length ; j++){
+                int val = m[i][j].length();
+                if (maxval < val){
+                    maxval = val;
+                }
+            }
+            listMaxColonne.add(maxval);
+        }
+        return listMaxColonne;
+    }
     public void afficherMatriceFloydWarshall() {
         System.out.println("Matrice avec l'algorithme de Floyd-Warshall : ");
+        String fullborder = "";
+        for(int i = 0 ; i < matriceFloydWarshall.length; i++){
+            fullborder += " ";
+        }
+        String border = "";
+        for(int i = 0 ; i < fullborder.length()*5 ; i++){
+            border += "-";
+        }
+        List<Integer> listMaxColonne = new ArrayList<>();
+        listMaxColonne = rechercheMaxLengthColonne(this.matriceFloydWarshall);
+
+        String Matrice = border + "\n";
         for(int i = 0; i < matriceFloydWarshall.length; i++) {
             for(int j = 0; j < matriceFloydWarshall.length; j++) {
-                System.out.print(matriceFloydWarshall[i][j] + " "); //On affiche ligne par ligne
+
+                int decalage = listMaxColonne.get(i) - matriceFloydWarshall[i][j].length();
+                String space = "";
+                for(int k = 0; k<decalage ; k++){
+                    space += " ";
+                }
+                String line = "";
+                if(j == 0){
+                    line += "| " + matriceFloydWarshall[i][j] + space + " |";
+                }
+                else {
+                    line += " " + matriceFloydWarshall[i][j] + space + " |"; //On affiche ligne par ligne
+                }
+                Matrice += line;
             }
-            System.out.println(); //On va à la ligne lorsque l'on a terminé un sommet
+            Matrice += "\n"; //On va à la ligne lorsque l'on a terminé un sommet
         }
-        System.out.println();
+        Matrice += border;
+        System.out.println(Matrice);
     }
 
     public boolean possedeCircuitAbsorbant(String[][] matriceValeurs){
