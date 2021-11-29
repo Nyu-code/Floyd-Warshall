@@ -44,7 +44,7 @@ public class Graphe {
 
     //Retourne la matrice des valeurs des chemins
     public String[][] matriceValeurs() {
-        String[][] mValeurs = new String[nbSommets][nbSommets]; //Matrice d'adjacence, valeurs initialisées à 0
+        String[][] mValeurs = new String[nbSommets][nbSommets];
         for (int i = 0; i< nbSommets ; i++){
             for (int j = 0; j< nbSommets; j++){
                 mValeurs[i][j] = "inf";
@@ -55,7 +55,7 @@ public class Graphe {
         }
 
         int numSommet;
-        int numSommetAdj; // Numéro sommet adjacent
+        int numSommetAdj; // Numéro sommet
         String valeur; // Valeur du chemin
 
         for (ArrayList<Integer> lineData: data) {
@@ -73,7 +73,7 @@ public class Graphe {
             }
         }
 
-        matriceValeurs = mValeurs; //On met la matrice d'adjacence en mémoire
+        matriceValeurs = mValeurs; //On met la matrice de valeur
         return mValeurs;
     }
 
