@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Graphe {
     private int nbSommets;
     private int nbArcs;
     private ArrayList<ArrayList<Integer>> data; //ArrayList contenant des ArrayList contenant chacune [extremite initiale, terminale, valeur arc]
     private int[][] matriceAdjacence;
-    private int[][] matriceValeurs;
+    private String[][] matriceValeurs;
+    private String[][] matriceFloydWarshall;
 
     public Graphe(int nbSommets, int nbArcs) {
         this.nbSommets = nbSommets;
@@ -66,21 +68,34 @@ public class Graphe {
     }
 
     //Retourne la matrice des valeurs des chemins
-    public int[][] matriceValeurs() {
-        int[][] mValeurs = new int[nbSommets][nbSommets]; //Matrice d'adjacence, valeurs initialisées à 0
+    public String[][] matriceValeurs() {
+        String[][] mValeurs = new String[nbSommets][nbSommets]; //Matrice d'adjacence, valeurs initialisées à 0
+        for (int i = 0; i< nbSommets ; i++){
+            for (int j = 0; j< nbSommets; j++){
+                mValeurs[i][j] = "inf";
+                if (i == j) {
+                    mValeurs[i][j] = "0";
+                }
+            }
+        }
 
         int numSommet;
         int numSommetAdj; // Numéro sommet adjacent
-        int valeur; // Valeur du chemin
+        String valeur; // Valeur du chemin
 
         for (ArrayList<Integer> lineData: data) {
             numSommet = lineData.get(0); //La première valeur de lineData est numSommet
             numSommetAdj = lineData.get(1); //2ème val : sommet adjacent
-            valeur = lineData.get(2); //Valeur du chemin
+            valeur = String.valueOf(lineData.get(2)); //Valeur du chemin
 
-            //On met la valeur de la matriceAdj à 1 lorsque les sommets sont adjacents
-            //On laisse à zéro si ce n'est pas le cas
-            mValeurs[numSommet][numSommetAdj] = valeur;
+            if (mValeurs[numSommet][numSommetAdj] != "0" & mValeurs[numSommet][numSommetAdj] != "inf"){
+                if (Integer.parseInt(mValeurs[numSommet][numSommetAdj]) > Integer.parseInt(valeur)){
+                    mValeurs[numSommet][numSommetAdj] = valeur;
+                }
+            }
+            else {
+                mValeurs[numSommet][numSommetAdj] = valeur;
+            }
         }
 
         matriceValeurs = mValeurs; //On met la matrice d'adjacence en mémoire
@@ -89,16 +104,130 @@ public class Graphe {
 
     //Affiche la matrice des valeurs des chemins
     public void afficherMatriceValeurs() {
-        System.out.println("Matrice des valeurs:");
+        System.out.println("Matrice avec l'algorithme des Valeurs : ");
+        String fullborder = "";
+        for(int i = 0 ; i < matriceValeurs.length; i++){
+            fullborder += " ";
+        }
+        int MaxValLen = rechercheMaxLengthColonne(this.matriceValeurs);
+        String Matrice = "";
         for(int i = 0; i < matriceValeurs.length; i++) {
             for(int j = 0; j < matriceValeurs.length; j++) {
-                System.out.print(matriceValeurs[i][j] + " "); //On affiche ligne par ligne
+
+                int decalage = MaxValLen - matriceValeurs[i][j].length();
+                String space = "";
+                for(int k = 0; k<decalage ; k++){
+                    space += " ";
+                }
+                String line = "";
+                if(j == 0){
+                    line += "[ " + matriceValeurs[i][j] + space + " |";
+                }
+                else if(j == matriceValeurs.length-1){
+                    line += " " + matriceValeurs[i][j] + space + " ]"; //On affiche ligne par ligne
+                }
+                else {
+                    line += " " + matriceValeurs[i][j] + space + " |"; //On affiche ligne par ligne
+                }
+                Matrice += line;
             }
-            System.out.println(); //On va à la ligne lorsque l'on a terminé un sommet
+            Matrice += "\n"; //On va à la ligne lorsque l'on a terminé un sommet
         }
-        System.out.println();
+        System.out.println(Matrice);
     }
 
+    public void floyd_Warshall(){
+        matriceFloydWarshall = this.matriceValeurs;
+        for (int k = 0 ; k < nbSommets ; k++) { //Nombre de répétitions à faire pour avoir la matrice avec tout les plus courts chemins possible de la matrice
+            for (int i = 0; i < nbSommets; i++) { //Boucle pour une matrice (nb sommets * nb sommets)
+                //System.out.println("i = " + i);
+                for (int j = 0; j < nbSommets; j++) {
+                    //System.out.println("j = " + j);
+                    if (matriceFloydWarshall[i][k] != "inf" & matriceFloydWarshall[k][j] != "inf" & i!=j) { //On vérifie qu'il n'y a pas de valeur infinie si il y en a un la valeur de M[i,j] reste pareil
+                        int val = Integer.parseInt(matriceFloydWarshall[i][k]) + Integer.parseInt(matriceFloydWarshall[k][j]); //Sinon on calcule le coût du chemin de i => k => j
+                        //System.out.println(matriceFloydWarshall[i][j]);
+                        if (matriceFloydWarshall[i][j] == "inf"){ //Si le chemin directe de i vers j = 0 ce qui veut dire infinie alors on lui accorde la valeur calculé directement et que le 0 n'est pas égale à une valeur de la diagonale.
+                            matriceFloydWarshall[i][j] = String.valueOf(val); //Si la valeur n'est pas égale à l'infinie alors on peut commencer la comparaison.
+                        }
+                        else if (val < Integer.parseInt(matriceFloydWarshall[i][j])) { //On compare la valeur calculé à la valeur initiale si la valeur calculé coûte moins cher que la valeur initiale alors on la remplace par la valeur calculé
+                            matriceFloydWarshall[i][j] = String.valueOf(val);
+                        }
+                    }
+                    else if (i==j){
+                        if (Integer.parseInt(matriceFloydWarshall[i][j]) > 0 && Integer.parseInt(matriceFloydWarshall[i][j]) != 0){
+                            matriceFloydWarshall[i][j] = "0";
+                        }
+                        else if (Integer.parseInt(matriceFloydWarshall[i][j]) < 0){
+                            System.out.println("Circuit absorbant détecté sur la diagonale donc pas de Floyd-Warshall");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public Integer rechercheMaxLengthColonne(String[][] m){
+        int valmaxlen = 0;
+        for (int i = 0 ; i < nbSommets ; i++) {
+            for (int j = 0; j < nbSommets ; j++) {
+                int val = m[i][j].length();
+                if (valmaxlen < val) {
+                    valmaxlen = val;
+                }
+            }
+        }
+        return valmaxlen;
+    }
+    public void afficherMatriceFloydWarshall() {
+        System.out.println("Matrice avec l'algorithme de Floyd-Warshall : ");
+        String fullborder = "";
+        for(int i = 0 ; i < matriceFloydWarshall.length; i++){
+            fullborder += " ";
+        }
+        int MaxValLen = rechercheMaxLengthColonne(this.matriceFloydWarshall);
+        String Matrice = "";
+        for(int i = 0; i < matriceFloydWarshall.length; i++) {
+            for(int j = 0; j < matriceFloydWarshall.length; j++) {
+
+                int decalage = MaxValLen - matriceFloydWarshall[i][j].length();
+                String space = "";
+                for(int k = 0; k<decalage ; k++){
+                    space += " ";
+                }
+                String line = "";
+                if(j == 0){
+                    line += "[ " + matriceFloydWarshall[i][j] + space + " |";
+                }
+                else if(j == matriceFloydWarshall.length-1){
+                    line += " " + matriceFloydWarshall[i][j] + space + " ]"; //On affiche ligne par ligne
+                }
+                else {
+                    line += " " + matriceFloydWarshall[i][j] + space + " |"; //On affiche ligne par ligne
+                }
+                Matrice += line;
+            }
+            Matrice += "\n"; //On va à la ligne lorsque l'on a terminé un sommet
+        }
+        System.out.println(Matrice);
+    }
+
+    public boolean possedeCircuitAbsorbant(String[][] matriceValeurs){
+        for(int i = 0; i < matriceValeurs.length; i++) {
+            for(int j = 0; j < matriceValeurs.length; j++) {
+                if (i != j){
+                    if (Integer.parseInt(matriceValeurs[i][j]) < 0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //GETTER Matrice Floyd-Warshall
+    public String [][] getMatriceFloydWarshall(){
+        return matriceFloydWarshall;
+    }
     //GETTER SETTER NBSOMMETS
     public int getNbSommets() {
         return nbSommets;

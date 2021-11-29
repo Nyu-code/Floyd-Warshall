@@ -2,6 +2,8 @@
 // Projet Graphe S5 - Groupe E3
 // BENOUDA Karim - LACHAUD Antoine - TRAN Kevin-Fei - XIONG Nicolas - WU Jacques
 
+import com.sun.javafx.image.impl.IntArgb;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
@@ -56,11 +58,15 @@ public class TestGraphe {
             int[][] matriceAdj = graphe.matriceAdj();
             graphe.afficherMatriceAdj();
 
-            int[][] matriceVal = graphe.matriceValeurs();
+            String[][] matriceVal = graphe.matriceValeurs();
             graphe.afficherMatriceValeurs();
-
             // 4.Floyd-Warshall
+            graphe.floyd_Warshall();
+            graphe.afficherMatriceFloydWarshall();
+
+
             // 5.Existence de circuit absorbant ?
+            //System.out.println(graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall()));
             // 5.1.Si NON: affichage des chemins
             //6.Demander si on veut recommencer avec un autre graphe
         }
