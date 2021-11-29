@@ -22,19 +22,6 @@ public class Graphe {
         this.data = data;
     }
 
-    //Affichage du graphe de manière brute [À DES FINS DE TESTS, INUTILE SINON]
-    public void afficherBrut() {
-        System.out.println("GRAPHE BRUT");
-        System.out.println("- - - - -");
-        System.out.println(nbSommets);
-        System.out.println(nbArcs);
-
-        for (ArrayList<Integer> lineData : data) {
-            System.out.println(lineData);
-        }
-        System.out.println();
-    }
-
     //Retourne la matrice d'adjacence du graphe
     public int[][] matriceAdj() {
         int[][] mAdj = new int[nbSommets][nbSommets]; //Matrice d'adjacence, valeurs initialisées à 0
@@ -53,18 +40,6 @@ public class Graphe {
 
         matriceAdjacence = mAdj; //On met la matrice d'adjacence en mémoire
         return mAdj;
-    }
-
-    //Affiche la matrice d'adjacence
-    public void afficherMatriceAdj() {
-        System.out.println("Matrice d'adjacence:");
-        for(int i = 0; i < matriceAdjacence.length; i++) {
-            for(int j = 0; j < matriceAdjacence.length; j++) {
-                System.out.print(matriceAdjacence[i][j] + " "); //On affiche ligne par ligne
-            }
-            System.out.println(); //On va à la ligne lorsque l'on a terminé un sommet
-        }
-        System.out.println();
     }
 
     //Retourne la matrice des valeurs des chemins
@@ -100,6 +75,85 @@ public class Graphe {
 
         matriceValeurs = mValeurs; //On met la matrice d'adjacence en mémoire
         return mValeurs;
+    }
+
+    public void floyd_Warshall(){
+        matriceFloydWarshall = this.matriceValeurs;
+        for (int k = 0 ; k < nbSommets ; k++) { //Nombre de répétitions à faire pour avoir la matrice avec tout les plus courts chemins possible de la matrice
+            for (int i = 0; i < nbSommets; i++) { //Boucle pour une matrice (nb sommets * nb sommets)
+                //System.out.println("i = " + i);
+                for (int j = 0; j < nbSommets; j++) {
+                    //System.out.println("j = " + j);
+                    if (matriceFloydWarshall[i][k] != "inf" & matriceFloydWarshall[k][j] != "inf" & i!=j) { //On vérifie qu'il n'y a pas de valeur infinie si il y en a un la valeur de M[i,j] reste pareil
+                        int val = Integer.parseInt(matriceFloydWarshall[i][k]) + Integer.parseInt(matriceFloydWarshall[k][j]); //Sinon on calcule le coût du chemin de i => k => j
+                        //System.out.println(matriceFloydWarshall[i][j]);
+                        if (matriceFloydWarshall[i][j] == "inf"){ //Si le chemin directe de i vers j = 0 ce qui veut dire infinie alors on lui accorde la valeur calculé directement et que le 0 n'est pas égale à une valeur de la diagonale.
+                            matriceFloydWarshall[i][j] = String.valueOf(val); //Si la valeur n'est pas égale à l'infinie alors on peut commencer la comparaison.
+                        }
+                        else if (val < Integer.parseInt(matriceFloydWarshall[i][j])) { //On compare la valeur calculé à la valeur initiale si la valeur calculé coûte moins cher que la valeur initiale alors on la remplace par la valeur calculé
+                            matriceFloydWarshall[i][j] = String.valueOf(val);
+                        }
+                    }
+                    else if (i==j){
+                        if (Integer.parseInt(matriceFloydWarshall[i][j]) > 0 && Integer.parseInt(matriceFloydWarshall[i][j]) != 0){
+                            matriceFloydWarshall[i][j] = "0";
+                        }
+                        else if (Integer.parseInt(matriceFloydWarshall[i][j]) < 0){
+                            System.out.println("Circuit absorbant détecté sur la diagonale donc pas de Floyd-Warshall");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean possedeCircuitAbsorbant(String[][] matriceValeurs){
+        for(int i = 0; i < matriceValeurs.length; i++) {
+            for(int j = 0; j < matriceValeurs.length; j++) {
+                if (i != j){
+                    if (Integer.parseInt(matriceValeurs[i][j]) < 0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public Integer rechercheMaxLengthColonne(String[][] m){
+        int valmaxlen = 0;
+        for (int i = 0 ; i < nbSommets ; i++) {
+            for (int j = 0; j < nbSommets ; j++) {
+                int val = m[i][j].length();
+                if (valmaxlen < val) {
+                    valmaxlen = val;
+                }
+            }
+        }
+        return valmaxlen;
+    }
+    //Affichage du graphe de manière brute [À DES FINS DE TESTS, INUTILE SINON]
+    public void afficherBrut() {
+        System.out.println("GRAPHE BRUT");
+        System.out.println("- - - - -");
+        System.out.println(nbSommets);
+        System.out.println(nbArcs);
+
+        for (ArrayList<Integer> lineData : data) {
+            System.out.println(lineData);
+        }
+        System.out.println();
+    }
+    //Affiche la matrice d'adjacence
+    public void afficherMatriceAdj() {
+        System.out.println("Matrice d'adjacence:");
+        for(int i = 0; i < matriceAdjacence.length; i++) {
+            for(int j = 0; j < matriceAdjacence.length; j++) {
+                System.out.print(matriceAdjacence[i][j] + " "); //On affiche ligne par ligne
+            }
+            System.out.println(); //On va à la ligne lorsque l'on a terminé un sommet
+        }
+        System.out.println();
     }
 
     //Affiche la matrice des valeurs des chemins
@@ -140,48 +194,6 @@ public class Graphe {
         System.out.println(Matrice);
     }
 
-    public void floyd_Warshall(){
-        matriceFloydWarshall = this.matriceValeurs;
-        for (int k = 0 ; k < nbSommets ; k++) { //Nombre de répétitions à faire pour avoir la matrice avec tout les plus courts chemins possible de la matrice
-            for (int i = 0; i < nbSommets; i++) { //Boucle pour une matrice (nb sommets * nb sommets)
-                //System.out.println("i = " + i);
-                for (int j = 0; j < nbSommets; j++) {
-                    //System.out.println("j = " + j);
-                    if (matriceFloydWarshall[i][k] != "inf" & matriceFloydWarshall[k][j] != "inf" & i!=j) { //On vérifie qu'il n'y a pas de valeur infinie si il y en a un la valeur de M[i,j] reste pareil
-                        int val = Integer.parseInt(matriceFloydWarshall[i][k]) + Integer.parseInt(matriceFloydWarshall[k][j]); //Sinon on calcule le coût du chemin de i => k => j
-                        //System.out.println(matriceFloydWarshall[i][j]);
-                        if (matriceFloydWarshall[i][j] == "inf"){ //Si le chemin directe de i vers j = 0 ce qui veut dire infinie alors on lui accorde la valeur calculé directement et que le 0 n'est pas égale à une valeur de la diagonale.
-                            matriceFloydWarshall[i][j] = String.valueOf(val); //Si la valeur n'est pas égale à l'infinie alors on peut commencer la comparaison.
-                        }
-                        else if (val < Integer.parseInt(matriceFloydWarshall[i][j])) { //On compare la valeur calculé à la valeur initiale si la valeur calculé coûte moins cher que la valeur initiale alors on la remplace par la valeur calculé
-                            matriceFloydWarshall[i][j] = String.valueOf(val);
-                        }
-                    }
-                    else if (i==j){
-                        if (Integer.parseInt(matriceFloydWarshall[i][j]) > 0 && Integer.parseInt(matriceFloydWarshall[i][j]) != 0){
-                            matriceFloydWarshall[i][j] = "0";
-                        }
-                        else if (Integer.parseInt(matriceFloydWarshall[i][j]) < 0){
-                            System.out.println("Circuit absorbant détecté sur la diagonale donc pas de Floyd-Warshall");
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public Integer rechercheMaxLengthColonne(String[][] m){
-        int valmaxlen = 0;
-        for (int i = 0 ; i < nbSommets ; i++) {
-            for (int j = 0; j < nbSommets ; j++) {
-                int val = m[i][j].length();
-                if (valmaxlen < val) {
-                    valmaxlen = val;
-                }
-            }
-        }
-        return valmaxlen;
-    }
     public void afficherMatriceFloydWarshall() {
         int MaxValLen = rechercheMaxLengthColonne(this.matriceFloydWarshall);
         System.out.println("Matrice avec l'algorithme de Floyd-Warshall : ");
@@ -217,19 +229,6 @@ public class Graphe {
             Matrice += "\n"; //On va à la ligne lorsque l'on a terminé un sommet
         }
         System.out.println(Matrice);
-    }
-
-    public boolean possedeCircuitAbsorbant(String[][] matriceValeurs){
-        for(int i = 0; i < matriceValeurs.length; i++) {
-            for(int j = 0; j < matriceValeurs.length; j++) {
-                if (i != j){
-                    if (Integer.parseInt(matriceValeurs[i][j]) < 0){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     //GETTER Matrice Floyd-Warshall
