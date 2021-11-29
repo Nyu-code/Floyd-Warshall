@@ -100,7 +100,8 @@ public class Graphe {
                         }
                         else if (Integer.parseInt(matriceFloydWarshall[i][j]) < 0){
                             System.out.println("Circuit absorbant détecté sur la diagonale donc pas de Floyd-Warshall");
-                            break;
+                            this.matriceFloydWarshall = this.matriceValeurs;
+                            return;
                         }
                     }
                 }
