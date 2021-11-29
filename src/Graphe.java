@@ -104,13 +104,17 @@ public class Graphe {
 
     //Affiche la matrice des valeurs des chemins
     public void afficherMatriceValeurs() {
-        System.out.println("Matrice avec l'algorithme des Valeurs : ");
-        String fullborder = "";
-        for(int i = 0 ; i < matriceValeurs.length; i++){
-            fullborder += " ";
-        }
         int MaxValLen = rechercheMaxLengthColonne(this.matriceValeurs);
-        String Matrice = "";
+        System.out.println("Matrice des valeurs : ");
+        String fullborder = "      ";
+        for(int i = 0 ; i < matriceValeurs.length; i++){
+            String space = "";
+            for(int k = 0; k< MaxValLen-1 ; k++){
+                space += " ";
+            }
+            fullborder += " " +i + space + "  ";
+        }
+        String Matrice = fullborder + "\n";
         for(int i = 0; i < matriceValeurs.length; i++) {
             for(int j = 0; j < matriceValeurs.length; j++) {
 
@@ -121,7 +125,7 @@ public class Graphe {
                 }
                 String line = "";
                 if(j == 0){
-                    line += "[ " + matriceValeurs[i][j] + space + " |";
+                    line += i + "   [ " + matriceValeurs[i][j] + space + " |";
                 }
                 else if(j == matriceValeurs.length-1){
                     line += " " + matriceValeurs[i][j] + space + " ]"; //On affiche ligne par ligne
