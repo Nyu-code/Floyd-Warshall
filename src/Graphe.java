@@ -179,13 +179,17 @@ public class Graphe {
         return valmaxlen;
     }
     public void afficherMatriceFloydWarshall() {
-        System.out.println("Matrice avec l'algorithme de Floyd-Warshall : ");
-        String fullborder = "";
-        for(int i = 0 ; i < matriceFloydWarshall.length; i++){
-            fullborder += " ";
-        }
         int MaxValLen = rechercheMaxLengthColonne(this.matriceFloydWarshall);
-        String Matrice = "";
+        System.out.println("Matrice avec l'algorithme de Floyd-Warshall : ");
+        String fullborder = "      ";
+        for(int i = 0 ; i < matriceFloydWarshall.length; i++){
+            String space = "";
+            for(int k = 0; k< MaxValLen-1 ; k++){
+                space += " ";
+            }
+            fullborder += " " +i + space + "  ";
+        }
+        String Matrice = fullborder + "\n";
         for(int i = 0; i < matriceFloydWarshall.length; i++) {
             for(int j = 0; j < matriceFloydWarshall.length; j++) {
 
@@ -196,7 +200,7 @@ public class Graphe {
                 }
                 String line = "";
                 if(j == 0){
-                    line += "[ " + matriceFloydWarshall[i][j] + space + " |";
+                    line += i + "   [ " + matriceFloydWarshall[i][j] + space + " |";
                 }
                 else if(j == matriceFloydWarshall.length-1){
                     line += " " + matriceFloydWarshall[i][j] + space + " ]"; //On affiche ligne par ligne
