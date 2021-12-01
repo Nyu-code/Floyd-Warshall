@@ -2,8 +2,6 @@
 // Projet Graphe S5 - Groupe E3
 // BENOUDA Karim - LACHAUD Antoine - TRAN Kevin-Fei - XIONG Nicolas - WU Jacquesgraph
 
-import com.sun.javafx.image.impl.IntArgb;
-
 import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
@@ -16,8 +14,9 @@ import java.util.Scanner;
 public class TestGraphe {
     public static void main(String[] args) throws IOException {
         System.out.println("Bienvenue dans le programme de test de l'algorithme de Floyd-Warshall !");
-
+        Boolean resultat = true;
         // 1.Choix du graphe
+        do {
         Scanner sc = new Scanner(System.in); // Création d'un scanner pour que l'utilisateur entre le numéro du graphe
 
         System.out.println("Veuillez entrer le numéro du graphe que vous voulez analyser: ");
@@ -65,10 +64,19 @@ public class TestGraphe {
             graphe.afficherMatriceFloydWarshall();
 
 
+
             // 5.Existence de circuit absorbant ?
             //System.out.println(graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall()));
             // 5.1.Si NON: affichage des chemins
             //6.Demander si on veut recommencer avec un autre graphe
         }
+            System.out.println("Souhaitez-vous continuer avec un autre graphe ? Entrez non si vous souhaitez arrêter");
+            Scanner scanner = new Scanner(System.in);
+            String reponse = scanner.nextLine();
+            if (reponse.equals("non")){
+                resultat = false;
+            }
+        } while (resultat != false);
+
     }
 }
