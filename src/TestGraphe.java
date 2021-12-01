@@ -1,6 +1,6 @@
 // EFREI PARIS L3NEW
 // Projet Graphe S5 - Groupe E3
-// BENOUDA Karim - LACHAUD Antoine - TRAN Kevin-Fei - XIONG Nicolas - WU Jacquesgraph
+// BENOUDA Karim - LACHAUD Antoine - TRAN Kevin-Fei - XIONG Nicolas - WU Jacques graph
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class TestGraphe {
     public static void main(String[] args) throws IOException {
         System.out.println("Bienvenue dans le programme de test de l'algorithme de Floyd-Warshall !");
-        Boolean resultat = true;
+        boolean resultat = true;
         // 1.Choix du graphe
         do {
         Scanner sc = new Scanner(System.in); // Création d'un scanner pour que l'utilisateur entre le numéro du graphe
@@ -61,22 +61,33 @@ public class TestGraphe {
             graphe.afficherMatriceValeurs();
             // 4.Floyd-Warshall
             graphe.floyd_Warshall();
-            graphe.afficherMatriceFloydWarshall();
 
 
-
+            boolean absorbant = false;
             // 5.Existence de circuit absorbant ?
-            graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
+            absorbant=graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
+
+            if(!absorbant){
+                graphe.afficherMatriceDesChemins();
+            }
             // 5.1.Si NON: affichage des chemins
             //6.Demander si on veut recommencer avec un autre graphe
         }
-            System.out.println("Souhaitez-vous continuer avec un autre graphe ? Entrez non si vous souhaitez arrêter");
-            Scanner scanner = new Scanner(System.in);
-            String reponse = scanner.nextLine();
-            if (reponse.equals("non")){
-                resultat = false;
+            boolean go = false;
+            while(!go) {
+                System.out.println("Souhaitez-vous continuer avec un autre graphe ? Entrez 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez .");
+                Scanner scanner = new Scanner(System.in);
+                String reponse = scanner.nextLine();
+                if (reponse.equals("non")) {
+                    resultat = false;
+                    scanner.close();
+                    go = true;
+                } else if (reponse.equals("oui")) {
+                    go = true;
+                } else {
+                    System.out.println("Je n'ai pas compris votre réponse veuillez écrire 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez arrêter.\n");
+                }
             }
-        } while (resultat != false);
-
+        } while (resultat);
     }
 }
