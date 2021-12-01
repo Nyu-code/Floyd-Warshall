@@ -141,7 +141,7 @@ public class Graphe {
         for(int i = 0; i < matriceValeurs.length; i++) {
             for(int j = 0; j < matriceValeurs.length; j++) {
                 if (i != j){
-                    if (matriceValeurs[i][j] != "inf") {
+                    if (!Objects.equals(matriceValeurs[i][j], "inf")) {
                         if (Integer.parseInt(matriceValeurs[i][j]) < 0) {
                             System.out.println("Le graphe possède un circuit absorbant");
                             return true;
