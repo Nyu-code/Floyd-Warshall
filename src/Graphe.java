@@ -112,12 +112,16 @@ public class Graphe {
         for(int i = 0; i < matriceValeurs.length; i++) {
             for(int j = 0; j < matriceValeurs.length; j++) {
                 if (i != j){
-                    if (Integer.parseInt(matriceValeurs[i][j]) < 0){
-                        return true;
+                    if (matriceValeurs[i][j] != "inf") {
+                        if (Integer.parseInt(matriceValeurs[i][j]) < 0) {
+                            System.out.println("Le graphe possède un circuit absorbant");
+                            return true;
+                        }
                     }
                 }
             }
         }
+        System.out.println("Le graphe ne possède pas de circuit absorbant");
         return false;
     }
     //Fonction permettant de chercher la valeur avec le plus long caractère de la matrice

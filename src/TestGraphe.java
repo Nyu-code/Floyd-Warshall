@@ -66,7 +66,7 @@ public class TestGraphe {
 
 
             // 5.Existence de circuit absorbant ?
-            //System.out.println(graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall()));
+            graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
             // 5.1.Si NON: affichage des chemins
             //6.Demander si on veut recommencer avec un autre graphe
         }
