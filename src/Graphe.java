@@ -1,3 +1,7 @@
+// EFREI PARIS L3NEW
+// Projet Graphe S5 - Groupe E3
+// BENOUDA Karim - LACHAUD Antoine - TRAN Kevin-Fei - XIONG Nicolas - WU Jacques graph
+
 import java.util.ArrayList;
 import java.util.Objects;
 
