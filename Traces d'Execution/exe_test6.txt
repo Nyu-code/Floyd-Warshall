@@ -1,0 +1,18 @@
+Bienvenue dans le programme de test de l'algorithme de Floyd-Warshall !
+Veuillez entrer le numéro du graphe que vous voulez analyser: 
+test6
+Matrice d'adjacence:
+0 1 1 0 
+0 1 1 1 
+1 1 0 1 
+0 0 1 0 
+
+Matrice des valeurs : 
+       0     1     2     3    
+0   [ 0   | 1   | -5  | inf ]
+1   [ inf | -1  | -3  | 2   ]
+2   [ 6   | 4   | 0   | 2   ]
+3   [ inf | inf | 2   | 0   ]
+
+Circuit absorbant détecté sur la diagonale donc pas de Floyd-Warshall
+Le graphe possède un circuit absorbant

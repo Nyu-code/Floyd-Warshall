@@ -1,0 +1,55 @@
+Bienvenue dans le programme de test de l'algorithme de Floyd-Warshall !
+Veuillez entrer le numéro du graphe que vous voulez analyser: 
+test1
+Matrice d'adjacence:
+0 1 0 0 
+0 0 1 1 
+0 0 0 1 
+0 0 0 0 
+
+Matrice des valeurs : 
+       0     1     2     3    
+0   [ 0   | 1   | inf | inf ]
+1   [ inf | 0   | 3   | 5   ]
+2   [ inf | inf | 0   | 2   ]
+3   [ inf | inf | inf | 0   ]
+
+Floyd-Warshall étape : 1
+Matrice avec l'algorithme de Floyd-Warshall : 
+       0     1     2     3    
+0   [ 0   | 1   | inf | inf ]
+1   [ inf | 0   | 3   | 5   ]
+2   [ inf | inf | 0   | 2   ]
+3   [ inf | inf | inf | 0   ]
+
+Floyd-Warshall étape : 2
+Matrice avec l'algorithme de Floyd-Warshall : 
+       0     1     2     3    
+0   [ 0   | 1   | 4   | 6   ]
+1   [ inf | 0   | 3   | 5   ]
+2   [ inf | inf | 0   | 2   ]
+3   [ inf | inf | inf | 0   ]
+
+Floyd-Warshall étape : 3
+Matrice avec l'algorithme de Floyd-Warshall : 
+       0     1     2     3    
+0   [ 0   | 1   | 4   | 6   ]
+1   [ inf | 0   | 3   | 5   ]
+2   [ inf | inf | 0   | 2   ]
+3   [ inf | inf | inf | 0   ]
+
+Floyd-Warshall étape : 4
+Matrice avec l'algorithme de Floyd-Warshall : 
+       0     1     2     3    
+0   [ 0   | 1   | 4   | 6   ]
+1   [ inf | 0   | 3   | 5   ]
+2   [ inf | inf | 0   | 2   ]
+3   [ inf | inf | inf | 0   ]
+
+Le graphe ne possède pas de circuit absorbant
+Matrice des chemins : 
+      0   1   2   3  
+0   [ 0 | 0 | 1 | 1 ]
+1   [ ? | 1 | 1 | 1 ]
+2   [ ? | ? | 2 | 2 ]
+3   [ ? | ? | ? | 3 ]
