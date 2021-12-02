@@ -184,10 +184,20 @@ public class Graphe {
     //Affiche la matrice d'adjacence
     public void afficherMatriceAdj() {
         System.out.println("Matrice d'adjacence:");
+        String fullborder = "    "; //Ligne du haut indiquant chaque sommet du graphe
+
         for(int i = 0; i < matriceAdjacence.length; i++) {
+            fullborder += i + " ";
+        }
+
+        System.out.println(fullborder);
+
+        for(int i = 0; i < matriceAdjacence.length; i++) {
+            System.out.print(i + " [ ");
             for(int j = 0; j < matriceAdjacence.length; j++) {
                 System.out.print(matriceAdjacence[i][j] + " "); //On affiche ligne par ligne
             }
+            System.out.print("]");
             System.out.println(); //On va à la ligne lorsque l'on a terminé un sommet
         }
         System.out.println();
@@ -202,7 +212,7 @@ public class Graphe {
             for(int k = 0; k< MaxValLen-1 ; k++){
                 space += " ";
             }
-            fullborder += " " +i + space + "  ";
+            fullborder += " " + i + space + "  ";
         }
         String Matrice = fullborder + "\n";
         for(int i = 0; i < matriceDesChemins.length; i++) { //Boucle permettant le parcours de la matrice, i = ligne
