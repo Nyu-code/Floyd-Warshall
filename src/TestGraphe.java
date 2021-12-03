@@ -63,11 +63,11 @@ public class TestGraphe {
 
             boolean absorbant = false;
             // 5.Existence de circuit absorbant ?
-            absorbant=graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
+            //absorbant=graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
 
-            if(!absorbant){
-                graphe.afficherMatriceDesChemins();
-            }
+            //if(!absorbant){
+            //    graphe.afficherMatriceDesChemins();
+            //}
             // 5.1.Si NON: affichage des chemins
             //6.Demander si on veut recommencer avec un autre graphe
         }

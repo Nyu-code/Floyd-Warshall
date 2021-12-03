@@ -132,6 +132,11 @@ public class Graphe {
                             matriceFloydWarshall[i][j] = String.valueOf(val);
                             this.matriceDesChemins[i][j] = String.valueOf(k);
                         }
+                        if(i == j & Integer.parseInt(matriceFloydWarshall[i][j]) < 0){
+                            matriceFloydWarshall = this.matriceValeurs;
+                            System.out.println("Circuit absorbant detécté, on arrête l'algorithme de Floyd-Warshall");
+                            return;
+                        }
                     }
                 }
             }
