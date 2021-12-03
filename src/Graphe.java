@@ -143,6 +143,7 @@ public class Graphe {
             }
             afficherMatriceFloydWarshall();
         }
+        afficherMatriceDesChemins();
     }
 
     //À des fins de test, ne sert à rien sinon
