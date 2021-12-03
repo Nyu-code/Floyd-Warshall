@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Graphe {
+public class E3_Graphe {
     private int nbSommets;
     private int nbArcs;
     private ArrayList<ArrayList<Integer>> data; //ArrayList contenant des ArrayList contenant chacune [extremite initiale, terminale, valeur arc]
@@ -14,13 +14,13 @@ public class Graphe {
     private String[][] matriceFloydWarshall;
     private String[][] matriceDesChemins;
     //Constructeur de la classe Graphe
-    public Graphe(int nbSommets, int nbArcs) {
+    public E3_Graphe(int nbSommets, int nbArcs) {
         this.nbSommets = nbSommets;
         this.nbArcs = nbArcs;
     }
 
     //Constructeur du graphe
-    public Graphe(int nbSommets, int nbArcs, ArrayList<ArrayList<Integer>> data) {
+    public E3_Graphe(int nbSommets, int nbArcs, ArrayList<ArrayList<Integer>> data) {
         this.nbSommets = nbSommets;
         this.nbArcs = nbArcs;
         this.data = data;
