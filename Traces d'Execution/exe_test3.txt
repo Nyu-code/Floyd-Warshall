@@ -46,3 +46,10 @@ Matrice avec l'algorithme de Floyd-Warshall :
 1   [ inf | 0   | -3  | -1  ]
 2   [ inf | 4   | 0   | 2   ]
 3   [ inf | inf | inf | 0   ]
+
+Matrice des chemins : 
+      0   1   2   3  
+0   [ 0 | 2 | 0 | 2 ]
+1   [ ? | 1 | 1 | 2 ]
+2   [ ? | 2 | 2 | 2 ]
+3   [ ? | ? | ? | 3 ]

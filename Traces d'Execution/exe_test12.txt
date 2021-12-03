@@ -1,4 +1,4 @@
-Bienvenue dans le programme de test de l'algorithme de Floyd-Warshall !
+1Bienvenue dans le programme de test de l'algorithme de Floyd-Warshall !
 Veuillez entrer le numéro du graphe que vous voulez analyser: 
 test12
 Matrice d'adjacence:
