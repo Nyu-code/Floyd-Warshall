@@ -16,4 +16,3 @@ Matrice des valeurs :
 3   [ inf | inf | 2   | 0   ]
 
 Circuit absorbant détecté sur la diagonale donc pas de Floyd-Warshall
-Le graphe possède un circuit absorbant

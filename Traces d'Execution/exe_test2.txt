@@ -46,5 +46,3 @@ Matrice avec l'algorithme de Floyd-Warshall :
 1   [ inf | 0   | -3  | -1  ]
 2   [ inf | inf | 0   | 2   ]
 3   [ inf | inf | inf | 0   ]
-
-Le graphe possède un circuit absorbant

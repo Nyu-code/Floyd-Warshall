@@ -119,6 +119,5 @@ Matrice avec l'algorithme de Floyd-Warshall :
 6   [ inf | inf | inf | inf | inf | -2  | 0   | -2  ]
 7   [ inf | inf | inf | inf | inf | inf | inf | 0   ]
 
-Le graphe possède un circuit absorbant
 Souhaitez-vous continuer avec un autre graphe ? Entrez 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez .
 non

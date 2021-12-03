@@ -47,10 +47,4 @@ Matrice avec l'algorithme de Floyd-Warshall :
 2   [ inf | inf | 0   | 2   ]
 3   [ inf | inf | inf | 0   ]
 
-Le graphe ne possède pas de circuit absorbant
-Matrice des chemins : 
-      0   1   2   3  
-0   [ 0 | 0 | 1 | 1 ]
-1   [ ? | 1 | 1 | 1 ]
-2   [ ? | ? | 2 | 2 ]
-3   [ ? | ? | ? | 3 ]
+Souhaitez-vous continuer avec un autre graphe ? Entrez 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez .

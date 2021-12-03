@@ -47,4 +47,4 @@ Matrice avec l'algorithme de Floyd-Warshall :
 2   [ 6  | 4  | 0  | 2  ]
 3   [ 8  | 6  | 2  | 0  ]
 
-Le graphe possède un circuit absorbant
+Souhaitez-vous continuer avec un autre graphe ? Entrez 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez .
