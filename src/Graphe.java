@@ -144,10 +144,11 @@ public class Graphe {
         }
     }
 
+    //À des fins de test, ne sert à rien sinon
     public boolean possedeCircuitAbsorbant(String[][] matriceValeurs){
         for(int i = 0; i < matriceValeurs.length; i++) {
             for(int j = 0; j < matriceValeurs.length; j++) {
-                if (i != j){
+                if (i == j){
                     if (!Objects.equals(matriceValeurs[i][j], "inf")) {
                         if (Integer.parseInt(matriceValeurs[i][j]) < 0) {
                             System.out.println("Le graphe possède un circuit absorbant");
@@ -160,6 +161,7 @@ public class Graphe {
         System.out.println("Le graphe ne possède pas de circuit absorbant");
         return false;
     }
+
     //Fonction permettant de chercher la valeur avec le plus long caractère de la matrice
     public Integer rechercheMaxLengthColonne(String[][] m){
         int valmaxlen = 0;
