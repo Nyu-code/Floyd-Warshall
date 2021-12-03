@@ -133,8 +133,9 @@ public class Graphe {
                             this.matriceDesChemins[i][j] = String.valueOf(k);
                         }
                         if(i == j & Integer.parseInt(matriceFloydWarshall[i][j]) < 0){ //Circuit absorbant
+                            afficherMatriceFloydWarshall();
+                            System.out.println("Circuit absorbant detécté à : "+ j +" -> " + i +" = "+ matriceFloydWarshall[i][j] +" , on arrête l'algorithme de Floyd-Warshall");
                             matriceFloydWarshall = this.matriceValeurs;
-                            System.out.println("Circuit absorbant detécté, on arrête l'algorithme de Floyd-Warshall");
                             return;
                         }
                     }
