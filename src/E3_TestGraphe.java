@@ -49,40 +49,29 @@ public class E3_TestGraphe {
                 }
 
                 E3_Graphe graphe = new E3_Graphe(nbSommets, nbArcs, data); //Création d'un nouveau graphe contenant les valeurs brutes
-                //graphe.afficherBrut();
+                graphe.matriceAdj();
+                graphe.matriceValeurs();
+                //graphe.afficherBrut(); commande test
 
                 // 3.Affichage du graphe (Matrice d'adjacence et matrice de valeurs)
-                int[][] matriceAdj = graphe.matriceAdj();
                 graphe.afficherMatriceAdj();
-
-                String[][] matriceVal = graphe.matriceValeurs();
                 graphe.afficherMatriceValeurs();
                 // 4.Floyd-Warshall
                 graphe.floyd_Warshall();
 
-
-                //boolean absorbant = false;
-                // 5.Existence de circuit absorbant ?
-                //absorbant=graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
-
-                //if(!absorbant){
-                //    graphe.afficherMatriceDesChemins();
-                //}
-                // 5.1.Si NON: affichage des chemins
-                //6.Demander si on veut recommencer avec un autre graphe
             }
             boolean go = false;
             while(!go) {
                 System.out.println("Souhaitez-vous continuer avec un autre graphe ? Entrez 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez .");
                 Scanner scanner = new Scanner(System.in);
                 String reponse = scanner.nextLine();
-                if (reponse.equals("non")) {
+                if (reponse.equals("non")) { //Si la réponse de l'utilisateur est non alors on arrête tout
                     resultat = false;
                     scanner.close();
                     go = true;
-                } else if (reponse.equals("oui")) {
+                } else if (reponse.equals("oui")) { //sinon on continue d'analyser des graphes
                     go = true;
-                } else {
+                } else { //Si l'utilisateur dit pas soit oui soit non alors on repose la question
                     System.out.println("Je n'ai pas compris votre réponse veuillez écrire 'oui' si vous souhaitez analyser un autre graphe, 'non' si vous souhaitez arrêter.\n");
                 }
             }

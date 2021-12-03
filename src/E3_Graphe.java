@@ -13,13 +13,14 @@ public class E3_Graphe {
     private String[][] matriceValeurs;
     private String[][] matriceFloydWarshall;
     private String[][] matriceDesChemins;
+
     //Constructeur de la classe Graphe
     public E3_Graphe(int nbSommets, int nbArcs) {
         this.nbSommets = nbSommets;
         this.nbArcs = nbArcs;
     }
 
-    //Constructeur du graphe
+    //Constructeur principal du graphe
     public E3_Graphe(int nbSommets, int nbArcs, ArrayList<ArrayList<Integer>> data) {
         this.nbSommets = nbSommets;
         this.nbArcs = nbArcs;
@@ -27,7 +28,7 @@ public class E3_Graphe {
     }
 
     //Retourne la matrice d'adjacence du graphe
-    public int[][] matriceAdj() {
+    public void matriceAdj() {
         int[][] mAdj = new int[nbSommets][nbSommets]; //Matrice d'adjacence, valeurs initialisées à 0
 
         int numSommet;
@@ -41,9 +42,7 @@ public class E3_Graphe {
             //On laisse à zéro si ce n'est pas le cas
             mAdj[numSommet][numSommetAdj] = 1;
         }
-
         matriceAdjacence = mAdj; //On met la matrice d'adjacence en mémoire
-        return mAdj;
     }
     public void matriceDesChemins() {
         //On initialise la matrice des valeurs
@@ -66,7 +65,7 @@ public class E3_Graphe {
     }
 
     //Retourne la matrice des valeurs des chemins
-    public String[][] matriceValeurs() {
+    public void matriceValeurs() {
         //On initialise la matrice des valeurs
         //et on met par défaut la valeur inf sur chaque valeur sauf sur la diagonale on met 0
         String[][] mValeurs = new String[nbSommets][nbSommets];
@@ -98,7 +97,6 @@ public class E3_Graphe {
             }
         }
         matriceValeurs = mValeurs; //On met la matrice de valeur
-        return mValeurs;
     }
 
     public void floyd_Warshall(){
@@ -144,24 +142,6 @@ public class E3_Graphe {
             afficherMatriceFloydWarshall();
         }
         afficherMatriceDesChemins();
-    }
-
-    //À des fins de test, ne sert à rien sinon
-    public boolean possedeCircuitAbsorbant(String[][] matriceValeurs){
-        for(int i = 0; i < matriceValeurs.length; i++) {
-            for(int j = 0; j < matriceValeurs.length; j++) {
-                if (i == j){
-                    if (!Objects.equals(matriceValeurs[i][j], "inf")) {
-                        if (Integer.parseInt(matriceValeurs[i][j]) < 0) {
-                            System.out.println("Le graphe possède un circuit absorbant");
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        System.out.println("Le graphe ne possède pas de circuit absorbant");
-        return false;
     }
 
     //Fonction permettant de chercher la valeur avec le plus long caractère de la matrice
@@ -213,7 +193,7 @@ public class E3_Graphe {
     }
 
     public void afficherMatriceDesChemins() {
-        int MaxValLen = rechercheMaxLengthColonne(this.matriceDesChemins); //On cherche la valeur de la matrice où il y a le plus long caractère (len)
+        int MaxValLen = rechercheMaxLengthColonne(this.matriceDesChemins); //On cherche la valeur de la matrice où il y a le plus long caractère (length)
         System.out.println("Matrice des chemins : ");
         String fullborder = "     ";
         for(int i = 0 ; i < matriceDesChemins.length; i++){ //boucle permettant d'afficher les sommets sur la colonne de la matrice avec le respect des espacements
@@ -251,7 +231,7 @@ public class E3_Graphe {
 
     //Affiche la matrice des valeurs des chemins
     public void afficherMatriceValeurs() {
-        int MaxValLen = rechercheMaxLengthColonne(this.matriceValeurs); //On cherche la valeur de la matrice où il y a le plus long caractère (len)
+        int MaxValLen = rechercheMaxLengthColonne(this.matriceValeurs); //On cherche la valeur de la matrice où il y a le plus long caractère (length)
         System.out.println("Matrice des valeurs : ");
         String fullborder = "      ";
         for(int i = 0 ; i < matriceValeurs.length; i++){ //boucle permettant d'afficher les sommets sur la colonne de la matrice avec le respect des espacements
@@ -288,7 +268,7 @@ public class E3_Graphe {
     }
 
     public void afficherMatriceFloydWarshall() {
-        int MaxValLen = rechercheMaxLengthColonne(this.matriceFloydWarshall); //On cherche la valeur de la matrice où il y a le plus long caractère (len)
+        int MaxValLen = rechercheMaxLengthColonne(this.matriceFloydWarshall); //On cherche la valeur de la matrice où il y a le plus long caractère (length)
         System.out.println("Matrice avec l'algorithme de Floyd-Warshall : ");
         String fullborder = "      ";
         for(int i = 0 ; i < matriceFloydWarshall.length; i++){ //boucle permettant d'afficher les sommets sur la colonne de la matrice avec le respect des espacements
