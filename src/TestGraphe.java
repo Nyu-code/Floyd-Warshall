@@ -61,7 +61,7 @@ public class TestGraphe {
             graphe.floyd_Warshall();
 
 
-            boolean absorbant = false;
+            //boolean absorbant = false;
             // 5.Existence de circuit absorbant ?
             //absorbant=graphe.possedeCircuitAbsorbant(graphe.getMatriceFloydWarshall());
 
